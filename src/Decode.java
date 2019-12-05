@@ -62,7 +62,6 @@ public class Decode {
 		FileSystemView fsv = FileSystemView.getFileSystemView();
 		File home = fsv.getHomeDirectory();
 		String filePath = home.getPath();
-		System.out.println(filePath);
 		File desktop = new File(filePath); 
 	    String[] arr = desktop.list();
 	    for (String filename : arr) {
