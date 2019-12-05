@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import javax.swing.filechooser.FileSystemView;
+
 public class Decode {
 
 	private int x = -1;
@@ -43,7 +44,7 @@ public class Decode {
 		return ret;
 	}
 
-	public static void io(String filePath,String filename,String end1,String end2)throws Exception {
+	public static void io(String filename,String end1,String end2)throws Exception {
 		FileInputStream fis = new FileInputStream(new File(filename));
 		byte[] buffer = new byte[fis.available()];
 		fis.read(buffer);
@@ -51,7 +52,7 @@ public class Decode {
 		for (int i = 0; i < buffer.length; ++i) {
 			buffer[i] = (byte) (dc.NextMask() ^ buffer[i]);
 		}
-		FileOutputStream fos = new FileOutputStream(new File(filePath+"/"+filename.replace(end1, end2)));
+		FileOutputStream fos = new FileOutputStream(new File(filename.replace(end1, end2)));
 		fos.write(buffer);
 		fos.flush();
 		fos.close();
@@ -59,17 +60,14 @@ public class Decode {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		FileSystemView fsv = FileSystemView.getFileSystemView();
-		File home = fsv.getHomeDirectory();
-		String filePath = home.getPath();
-		File desktop = new File(filePath); 
+		File desktop = new File("."); 
 	    String[] arr = desktop.list();
 	    for (String filename : arr) {
 	        if(filename.endsWith(".qmc0")) {
-	        	io(filePath,filename,".qmc0",".mp3");
+	        	io(filename,".qmc0",".mp3");
 	        }
 	        if(filename.endsWith(".qmcflac")) {
-	        	io(filePath,filename,".qmcflac",".flac");
+	        	io(filename,".qmcflac",".flac");
 		        }
 	    }
 	}
