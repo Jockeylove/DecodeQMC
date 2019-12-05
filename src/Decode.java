@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import javax.swing.filechooser.FileSystemView;
 
 public class Decode {
 
@@ -66,9 +65,12 @@ public class Decode {
 	        if(filename.endsWith(".qmc0")) {
 	        	io(filename,".qmc0",".mp3");
 	        }
-	        if(filename.endsWith(".qmcflac")) {
+	        else if(filename.endsWith(".qmcmp3")) {
+	        	io(filename,".qmcmp3",".mp3");
+	        }
+	        else if(filename.endsWith(".qmcflac")) {
 	        	io(filename,".qmcflac",".flac");
-		        }
+		    }
 	    }
 	}
 }
